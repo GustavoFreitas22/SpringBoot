@@ -9,5 +9,5 @@ import com.freitasdev.rh.entity.Funcionario;
 
 @Repository
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
-	public List<Funcionario>findAllByNomeContainingIgnoreCase(String nome);
+	public List<Funcionario>findAllByNomeContainingIgnoreCase(String nome); // Query de banco de dados
 }
