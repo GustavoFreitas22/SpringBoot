@@ -29,7 +29,7 @@ public class testeController {
 	@Autowired // Faz as funcionalidades da interface instaciarem automaticamente
 	private TesteRepository teste;
 	
-	@GetMapping("/todos")
+	@GetMapping("/all")
 	public ResponseEntity<List <testeModel>> getAll(){
 		return ResponseEntity.ok(teste.findAll());
 	}
