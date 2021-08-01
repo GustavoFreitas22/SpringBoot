@@ -10,5 +10,5 @@ import com.freitasdev.games.model.Categoria;
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Long>{
 
-	public List<Categoria>findAllTipoContainingIgnoreCase(String tipo); 
+	public List<Categoria>findAllByTipoContainingIgnoreCase(String tipo); 
 }
