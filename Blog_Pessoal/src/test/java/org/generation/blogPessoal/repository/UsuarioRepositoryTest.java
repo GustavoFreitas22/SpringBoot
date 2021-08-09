@@ -1,9 +1,11 @@
 package org.generation.blogPessoal.repository;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.validation.constraints.AssertTrue;
 
@@ -17,15 +19,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT) // Para falar que são testes e diz que pode abrir em qualquer porta
-@TestInstance(TestInstance.Lifecycle.PER_CLASS) // Vai testar classes
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT) // Para falar que o porjeto deve ser aberto em ambiente de testes e diz que pode abrir em qualquer porta
+@TestInstance(TestInstance.Lifecycle.PER_CLASS) // Vai testar a classe toda de um vez, invez de metodo por metodo
 public class UsuarioRepositoryTest {
 	
 	@Autowired
 	private UsuarioRepository repositorioTest;
 	
-	@BeforeAll // isso aqui vai acontcer antes de eu testar
-	public void start () {
+	@BeforeAll // isso aqui vai acontcer antes de todos os testes rodarem
+	public void start () { // Method para criar dados no banco
 		LocalDate data = LocalDate.parse("2000-08-22", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		
 		  Usuario usuario = new Usuario(0, "João da Silva", "joao@email.com.br", "13465278", data);
@@ -43,11 +45,19 @@ public class UsuarioRepositoryTest {
 
 	}
 	
-	@Test
-	@DisplayName("Retorna o nome")
+	@Test // indica que será executado como um teste
+	@DisplayName("Retorna o nome") // modifica o nome do teste no display
 	public void findBynomeRetornaNome() {
 		Usuario user = repositorioTest.findByNome("João da Silva");
-		assertTrue(user.getNome().equals("João da Silva"));
+		assertTrue(user.getNome().equals("João da Silva")); // assertTrue afirma que a condição é verdadeira
+	}
+	
+	@Test
+	@DisplayName("Quantidades de objetos")
+	public void findUserNames() {
+		List<Usuario> users = repositorioTest.findAllByNomeContainingIgnoreCase("Silva");
+		
+		assertEquals(2, users.size());
 	}
 	
 	@AfterAll
