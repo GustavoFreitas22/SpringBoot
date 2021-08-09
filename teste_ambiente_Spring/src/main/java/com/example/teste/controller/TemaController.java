@@ -20,7 +20,7 @@ import com.example.teste.repository.temaRepository;
 
 @RestController
 @RequestMapping("/tema")
-@CrossOrigin("*")
+@CrossOrigin(value = "*", allowedHeaders = "*")
 public class TemaController {
 	@Autowired
 	private temaRepository repositorio;

@@ -17,7 +17,7 @@ import com.example.teste.service.UsuarioService;
 
 @RestController
 @RequestMapping("/usuarios")
-@CrossOrigin("*")
+@CrossOrigin(value = "*", allowedHeaders = "*" )
 public class UsuarioController {
 
 	@Autowired
