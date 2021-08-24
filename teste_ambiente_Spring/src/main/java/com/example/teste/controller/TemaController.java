@@ -53,6 +53,6 @@ public class TemaController {
 	public String delete(@PathVariable long id) {
 		repositorio.deleteById(id);
 		
-		return "Tema excluido com sucesso!";
+		return "Tema excluido com sucesso! Teste para git config";
 	}
 }
